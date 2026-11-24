@@ -1,0 +1,50 @@
+[
+  {
+    "name": "قناة الفريق",
+    "handle": "@HyperTeam_ITE",
+    "icon": "telegram",
+    "description": "تابعوا أخبار HyperTeam وإعلاناته عبر القناة الرسمية.",
+    "action": "انضموا إلى القناة",
+    "url": "https://t.me/HyperTeam_ITE"
+  },
+  {
+    "name": "مجموعة المناقشة",
+    "handle": "@HyperTeam_Chat",
+    "icon": "telegram",
+    "description": "مساحة للنقاش وتبادل الأفكار مع مجتمع الفريق.",
+    "action": "انضموا إلى المجموعة",
+    "url": "https://t.me/HyperTeam_Chat"
+  },
+  {
+    "name": "إنستغرام",
+    "handle": "@hyperteam_ite",
+    "icon": "instagram",
+    "description": "تابعوا أنشطتنا ولحظاتنا على إنستغرام.",
+    "action": "تابعونا على إنستغرام",
+    "url": "https://www.instagram.com/hyperteam_ite?stkn=MXhpdm42ZzBjODB1"
+  },
+  {
+    "name": "فيسبوك",
+    "handle": "HyperTeam",
+    "icon": "facebook",
+    "description": "تابعوا أخبار الفريق ومنشوراته على فيسبوك.",
+    "action": "تابعونا على فيسبوك",
+    "url": "https://www.facebook.com/share/1HVyP9hvtr/?mibextid=wwXIfr"
+  },
+  {
+    "name": "موقع الكورسات والبرامج",
+    "handle": "HyperTeam Crawler",
+    "icon": "link",
+    "description": "تصفحوا الكورسات والبرامج المتاحة للفريق.",
+    "action": "اكتشفوا الكورسات والبرامج",
+    "url": "https://hyper-team-ops.github.io/HyperTeam-Crawler/"
+  },
+  {
+    "name": "بوت الفريق",
+    "handle": "@HyperTeamITE_Bot",
+    "icon": "telegram",
+    "description": "تواصلوا مع بوت HyperTeam على تيليغرام.",
+    "action": "افتحوا بوت الفريق",
+    "url": "https://t.me/HyperTeamITE_Bot"
+  }
+]

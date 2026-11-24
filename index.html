@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7e8d2" />
+    <meta name="description" content="كل قنوات وروابط HyperTeam بمكان واحد." />
+    <title>HyperTeam | قنواتنا وروابطنا</title>
+    <link rel="icon" href="assets/branding/hyperteam-symbol-gradient.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="links.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="HyperTeam، الصفحة الرئيسية">
+        <img src="assets/branding/hyperteam-symbol-gradient.png" alt="" />
+        <span>HYPER <b>TEAM</b></span>
+      </a>
+      <nav aria-label="التنقل الرئيسي">
+        <a class="nav-link" href="#about">تعرّفوا علينا</a>
+        <a class="nav-cta" href="https://t.me/HyperTeam2" target="_blank" rel="noopener noreferrer">تواصلوا معنا <span aria-hidden="true">↙</span></a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> تعرّفوا علينا</p>
+          <h1 id="hero-title">من هو فريق <em>الهايبر؟</em></h1>
+          <p class="hero-description">فريق طلابي تقني وتطوعي من جامعة حلب، يعمل على تمكين الطلاب وبناء بيئة جامعية تشجع على التعلّم والتعاون.</p>
+          <a class="hero-link" href="#about">اكتشفوا رؤيتنا <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-orbit orbit-one"></div>
+          <div class="art-orbit orbit-two"></div>
+          <div class="art-sun"></div>
+          <img src="assets/branding/hyperteam-symbol-gradient.png" alt="" />
+          <span class="art-label">IDEAS IN MOTION</span>
+          <span class="art-dot dot-one"></span><span class="art-dot dot-two"></span>
+        </div>
+        <div class="hero-index"><span>01</span><span class="index-line"></span><span>روابطنا</span></div>
+      </section>
+
+      <section class="about section-wrap" id="about" aria-labelledby="about-title">
+        <div class="about-copy">
+          <p class="eyebrow">من نحن</p>
+          <h2 id="about-title">فريق الهايبر</h2>
+          <p>فريق الهايبر هو مجتمع طلابي تقني وتطوعي بارز في جامعة حلب، يُعنى بتمكين الطلاب تقنياً، وتقديم الدعم الأكاديمي والتقني، وبناء بيئة تعاونية تحفّز على التعلّم المستمر وتطوير المهارات البرمجية والتقنية.</p>
+        </div>
+        <div class="vision-copy">
+          <p class="eyebrow">رؤيتنا</p>
+          <p>أن نكون الفريق التطوعي الرائد في خدمة المجتمع الجامعي وتنمية روح المبادرة.</p>
+        </div>
+      </section>
+
+      <section class="closing welcome" aria-labelledby="welcome-title">
+        <div class="closing-inner">
+          <p class="eyebrow">يسعد فريق الهايبر بالترحيب بكم</p>
+          <h2 id="welcome-title">تهانينا بقبولكم<br /><em>الجامعي!</em></h2>
+          <p class="welcome-copy">تنطلق اليوم مرحلة جديدة مليئة بالتجارب الملهمة، لتكون خطوتكم الأولى في صناعة مستقبلكم.</p>
+          <a href="#channels">هنا وجهتكم <span aria-hidden="true">↓</span></a>
+        </div>
+        <span class="closing-watermark" aria-hidden="true">H</span>
+      </section>
+
+      <section class="channels section-wrap" id="channels" aria-labelledby="channels-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">قنوات HyperTeam وروابطه الرسمية</p>
+            <h2 id="channels-title">هنا وجهتكم.</h2>
+          </div>
+          <p class="section-note">اختاروا القناة المناسبة، أو امسحوا الرمز لتوصلوا إلها مباشرة.</p>
+        </div>
+        <div class="channel-grid" id="channel-grid" aria-live="polite"></div>
+        <p class="links-note" id="links-note" hidden>قريباً، بتلاقوا هون كل قنوات HyperTeam وروابطها.</p>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <a class="brand footer-brand" href="#top" aria-label="HyperTeam، إلى الأعلى">
+        <img src="assets/branding/hyperteam-symbol-gradient.png" alt="" />
+        <span>HYPER <b>TEAM</b></span>
+      </a>
+      <p>فريق HyperTeam · <span id="year"></span></p>
+    </footer>
+  </body>
+</html>
