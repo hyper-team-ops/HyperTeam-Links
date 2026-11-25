@@ -20,4 +20,6 @@ The page is static. Generate the QR images before publishing, push the files to 
 
 ## Brand assets
 
-The logo symbol and Cairo font files are copied from HyperTeam's approved identity assets. `assets/fonts/OFL.txt` contains the Cairo font license.
+The logo symbol and Cairo font files come from HyperTeam's identity assets. The Montserrat Latin and Noto Sans Arabic web fonts come from Google Fonts. Their SIL Open Font Licenses are in `assets/fonts/`.
+
+The page background is a web copy of the brand background `bg w1.png`.

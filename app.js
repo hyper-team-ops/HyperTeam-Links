@@ -1,5 +1,9 @@
 const grid = document.querySelector("#channel-grid");
 const links = window.HYPERTEAM_LINKS || [];
+const dialog = document.querySelector("#qr-dialog");
+const qrTitle = dialog.querySelector("#qr-title");
+const qrImage = dialog.querySelector(".qr-large");
+const qrAction = dialog.querySelector(".card-action");
 const iconPaths = {
   telegram: '<path d="m21.5 3.8-3.2 16c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L5.8 17.3l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.2 6c1-.4 1.8.2 1.3 1.8Z"/>',
   instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".7"/>',
@@ -21,22 +25,60 @@ function safeUrl(value) {
   }
 }
 
-if (!links.length) {
-  document.querySelector("#links-note").hidden = false;
-} else {
-  grid.innerHTML = links.map((item, index) => {
-    const href = safeUrl(item.url);
-    if (!href) return "";
-    const qr = item.qr ? `<img src="${item.qr}" alt="رمز QR لـ ${item.name}" loading="lazy" />` : `<span class="qr-pending">يُضاف الرمز عند تجهيز الرابط</span>`;
-    return `<article class="channel-card${index === 0 ? " featured" : ""}">
-      <div class="card-top"><span class="channel-icon">${icon(item.icon)}</span>${index === 0 ? '<span class="card-tag">القناة الرئيسية</span>' : ""}</div>
-      <h3>${item.name}</h3><p class="channel-handle">${item.handle || ""}</p>
-      <p class="channel-description">${item.description || "تابعونا على قناتنا الرسمية."}</p>
-      <a class="qr-link" href="${href}" target="_blank" rel="noopener noreferrer" aria-label="فتح ${item.name} في تبويب جديد">${qr}</a>
-      <span class="scan-hint">امسح الرمز أو اضغط عليه</span>
-      <a class="card-action" href="${href}" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">↗</span><b>${item.action || "انضموا إلينا"}</b></a>
-    </article>`;
-  }).join("");
+const htmlEntities = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, character => htmlEntities[character]);
 }
+
+const channels = links
+  .map(item => ({ ...item, href: safeUrl(item.url) }))
+  .filter(item => item.href);
+
+grid.innerHTML = channels.map((item, index) => {
+  const name = escapeHtml(item.name);
+  const actionText = escapeHtml(item.action || "انضموا إلينا");
+  const loading = index < 3 ? "eager" : "lazy";
+  const qr = item.qr ? `
+    <a class="qr-link" href="${escapeHtml(item.qr)}" target="_blank" rel="noopener noreferrer" aria-label="تكبير رمز ${name}">
+      <span class="qr-frame"><img src="${escapeHtml(item.qr)}" alt="" width="144" height="144" loading="${loading}" /></span>
+      <span class="qr-caption" aria-hidden="true">تكبير الرمز <span>⤢</span></span>
+    </a>` : "";
+
+  return `<article class="channel-card${index === 0 ? " featured" : ""}${qr ? "" : " without-qr"}">
+      <div class="card-details">
+        <span class="channel-icon">${icon(item.icon)}</span>
+        <div class="card-text">
+          <h3>${name}</h3>
+          ${item.handle ? `<p class="channel-handle" dir="ltr" lang="en">${escapeHtml(item.handle)}</p>` : ""}
+          <p class="channel-description">${escapeHtml(item.description || "تابعونا على قناتنا الرسمية.")}</p>
+        </div>
+      </div>
+      ${qr}
+      <a class="card-action" href="${escapeHtml(item.href)}" target="_blank" rel="noopener noreferrer"><span>${actionText}</span><span aria-hidden="true">↗</span></a>
+    </article>`;
+}).join("");
+
+document.querySelector("#links-note").hidden = channels.length > 0;
+
+grid.addEventListener("click", event => {
+  const trigger = event.target.closest(".qr-link");
+  if (!trigger || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || !dialog.showModal) return;
+
+  event.preventDefault();
+  const card = trigger.closest(".channel-card");
+  const action = card.querySelector(".card-action");
+  const name = card.querySelector("h3").textContent;
+  qrTitle.textContent = name;
+  qrImage.src = trigger.href;
+  qrImage.alt = `رمز QR لـ ${name}`;
+  qrAction.href = action.href;
+  qrAction.firstElementChild.textContent = action.firstElementChild.textContent;
+  dialog.showModal();
+});
+
+dialog.addEventListener("click", event => {
+  if (event.target === dialog) dialog.close();
+});
 
 document.querySelector("#year").textContent = new Date().getFullYear();
