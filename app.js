@@ -45,7 +45,8 @@ grid.innerHTML = channels.map((item, index) => {
       <span class="qr-caption" aria-hidden="true">تكبير الرمز <span>⤢</span></span>
     </a>` : "";
 
-  return `<article class="channel-card${index === 0 ? " featured" : ""}${qr ? "" : " without-qr"}">
+  const priorityClass = index === 0 ? " featured" : index < 3 ? " priority" : "";
+  return `<article class="channel-card${priorityClass}${qr ? "" : " without-qr"}" data-platform="${escapeHtml(item.icon || "link")}">
       <div class="card-details">
         <span class="channel-icon">${icon(item.icon)}</span>
         <div class="card-text">
@@ -82,3 +83,47 @@ dialog.addEventListener("click", event => {
 });
 
 document.querySelector("#year").textContent = new Date().getFullYear();
+
+const markLayers = document.querySelectorAll(".falling-marks");
+const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+const narrowScreen = matchMedia("(max-width: 580px)");
+
+function fall(mark, lane, count, alreadyFalling = false) {
+  const duration = 10500 + Math.random() * 9500;
+  const glide = (Math.random() - .5) * 46;
+  const opacity = .13 + Math.random() * .13;
+  mark.style.left = `${((lane + Math.random()) / count) * 96}%`;
+  mark.style.setProperty("--mark-width", `${(narrowScreen.matches ? 12 : 16) + Math.random() * 15}px`);
+  mark.style.setProperty("--mark-angle", `${(Math.random() - .5) * 28}deg`);
+
+  const animation = mark.animate([
+    { transform: "translate(0, 0)", opacity },
+    { transform: `translate(${glide}px, calc(100% + 72px))`, opacity },
+  ], { duration });
+
+  if (alreadyFalling) animation.currentTime = duration * (.15 + Math.random() * .75);
+  animation.onfinish = () => fall(mark, lane, count);
+}
+
+function renderFallingMarks() {
+  for (const layer of markLayers) {
+    for (const animation of layer.getAnimations({ subtree: true })) {
+      animation.cancel();
+    }
+    layer.replaceChildren();
+    if (reducedMotion.matches) continue;
+
+    const desktopCount = Number(layer.dataset.count);
+    const count = narrowScreen.matches ? Math.ceil(desktopCount * .6) : desktopCount;
+    for (let lane = 0; lane < count; lane++) {
+      const mark = document.createElement("span");
+      mark.className = "falling-mark";
+      layer.append(mark);
+      fall(mark, lane, count, true);
+    }
+  }
+}
+
+renderFallingMarks();
+reducedMotion.addEventListener("change", renderFallingMarks);
+narrowScreen.addEventListener("change", renderFallingMarks);

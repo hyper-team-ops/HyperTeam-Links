@@ -195,7 +195,8 @@ nav {
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(0, .85fr);
-  gap: 16px;
+  grid-template-areas: "copy art" "actions art";
+  gap: 12px 16px;
   align-items: center;
   width: min(calc(100% - 2 * var(--edge)), var(--page-width));
   margin: 18px auto 0;
@@ -249,19 +250,40 @@ nav {
   line-height: 1.85;
 }
 
+.hero-copy {
+  grid-area: copy;
+  align-self: end;
+}
+
+.hero-actions {
+  grid-area: actions;
+  align-self: start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .hero-link {
-  min-height: 44px;
-  margin-block-start: 5px;
-  padding-inline-end: 7px;
-  color: #f4ce83;
+  justify-content: center;
+  gap: 5px;
+  min-height: 46px;
+  padding: 6px 11px;
+  background: var(--cream);
+  color: var(--charcoal);
+  white-space: normal;
+  text-align: center;
   font-size: 13px;
 }
 
-.hero-link span {
-  transition: translate .16s ease;
+.hero-link-primary {
+  background: var(--gold);
+}
+
+.hero-link-help {
+  background: #efcd92;
 }
 
 .hero-art {
+  grid-area: art;
   position: relative;
   isolation: isolate;
   justify-self: center;
@@ -357,6 +379,8 @@ nav a, .card-action, .qr-link, .qr-frame, .channel-card, .closing-link, .qr-clos
 }
 
 .channel-card {
+  --card-tint: #f4e8d8;
+  --qr-rim: #e9d5b8;
   display: grid;
   grid-template-rows: 1fr auto auto;
   align-items: start;
@@ -365,13 +389,30 @@ nav a, .card-action, .qr-link, .qr-frame, .channel-card, .closing-link, .qr-clos
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: 17px;
-  background: var(--paper);
+  background: linear-gradient(145deg, var(--card-tint), var(--paper) 95%);
   box-shadow: var(--shadow);
 }
 
 .channel-card.featured {
+  --card-tint: #f7e6ba;
+  --qr-rim: #e9bb58;
   border-color: #c59442;
-  background: linear-gradient(155deg, #fff7e7, var(--paper) 75%);
+}
+
+.channel-card.priority {
+  --card-tint: #e8e5de;
+  --qr-rim: #ccc7bc;
+  border-color: #c7bfb1;
+}
+
+.channel-card.priority[data-platform="instagram"] {
+  --card-tint: var(--cream);
+  --qr-rim: color-mix(in srgb, var(--cream) 72%, var(--gold));
+  border-color: color-mix(in srgb, var(--cream) 53%, var(--gold));
+}
+
+.priority .card-action {
+  background: var(--card-tint);
 }
 
 .card-details {
@@ -434,49 +475,27 @@ nav a, .card-action, .qr-link, .qr-frame, .channel-card, .closing-link, .qr-clos
 .qr-link {
   display: grid;
   justify-items: center;
-  gap: 4px;
+  gap: 6px;
   justify-self: center;
-  width: min(100%, 142px);
+  width: min(100%, 152px);
   color: var(--copper);
   border-radius: 10px;
 }
 
 .qr-frame {
-  position: relative;
   display: block;
   width: 100%;
   aspect-ratio: 1;
-  border: 1px solid var(--line);
-  border-radius: 10px;
+  border: 5px solid var(--qr-rim);
+  border-radius: 14px;
   background: white;
-}
-
-.qr-frame::before, .qr-frame::after {
-  content: "";
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  pointer-events: none;
-}
-
-.qr-frame::before {
-  inset: -1px -1px auto auto;
-  border-top: 1px solid var(--orange);
-  border-right: 1px solid var(--orange);
-  border-top-right-radius: 10px;
-}
-
-.qr-frame::after {
-  inset: auto auto -1px -1px;
-  border-bottom: 1px solid var(--orange);
-  border-left: 1px solid var(--orange);
-  border-bottom-left-radius: 10px;
 }
 
 .qr-frame img {
   display: block;
   width: 100%;
   height: auto;
+  border-radius: 9px;
 }
 
 .qr-caption {
@@ -521,10 +540,47 @@ nav a, .card-action, .qr-link, .qr-frame, .channel-card, .closing-link, .qr-clos
   font-size: 14px;
 }
 
-.about, .closing {
+.student-help, .about, .closing {
   padding: clamp(20px, 3.2vw, 36px);
   border-radius: 19px;
   scroll-margin-top: 16px;
+}
+
+.student-help {
+  margin-block: 14px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.student-help h2 {
+  margin-block-end: 12px;
+  font-size: clamp(22px, 2.6vw, 32px);
+}
+
+.service-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service-list li {
+  padding: 12px;
+  border-inline-start: 2px solid var(--gold);
+  border-radius: 8px;
+  background: var(--canvas);
+}
+
+.service-list h3 {
+  margin-block-end: 3px;
+  font-size: 16px;
+}
+
+.service-list p {
+  color: var(--muted);
+  font-size: 13px;
 }
 
 .about {
@@ -532,9 +588,10 @@ nav a, .card-action, .qr-link, .qr-frame, .channel-card, .closing-link, .qr-clos
   grid-template-columns: 1.25fr .75fr;
   gap: 20px;
   align-items: center;
+  margin-block-start: 14px;
   border: 1px solid var(--line);
   border-inline-start: 3px solid var(--orange);
-  background: var(--paper);
+  background: linear-gradient(125deg, #fcf3e5, #f5e2c6);
 }
 
 .about h2 {
@@ -542,9 +599,9 @@ nav a, .card-action, .qr-link, .qr-frame, .channel-card, .closing-link, .qr-clos
   font-size: clamp(21px, 2.5vw, 30px);
 }
 
-.about h3 {
+.vision-copy h3 {
   margin-block-end: 3px;
-  color: var(--copper);
+  color: #f3ca7b;
   font-size: 16px;
 }
 
@@ -554,8 +611,13 @@ nav a, .card-action, .qr-link, .qr-frame, .channel-card, .closing-link, .qr-clos
 }
 
 .vision-copy {
-  padding-inline-start: 20px;
-  border-inline-start: 1px solid var(--line);
+  padding: clamp(12px, 1.8vw, 22px);
+  border-radius: 12px;
+  background: linear-gradient(145deg, var(--slate), var(--charcoal));
+}
+
+.vision-copy p {
+  color: var(--cream);
 }
 
 .closing {
@@ -573,6 +635,43 @@ nav a, .card-action, .qr-link, .qr-frame, .channel-card, .closing-link, .qr-clos
   margin-block-end: 5px;
   color: var(--paper);
   font-size: clamp(24px, 3.3vw, 37px);
+}
+
+.falling-panel {
+  position: relative;
+  isolation: isolate;
+}
+
+.falling-marks {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.falling-mark {
+  --mark-color: var(--gold);
+  position: absolute;
+  inset-block-start: 0;
+  height: 100%;
+  width: var(--mark-width);
+}
+
+.falling-mark::before {
+  content: "";
+  display: block;
+  width: 100%;
+  aspect-ratio: 100 / 193;
+  background: var(--mark-color);
+  -webkit-mask: url("assets/branding/hyperteam-circuit-shape.webp") center / contain no-repeat;
+  mask: url("assets/branding/hyperteam-circuit-shape.webp") center / contain no-repeat;
+  transform: translateY(-110%) rotate(var(--mark-angle));
+}
+
+.falling-mark:nth-child(3n) {
+  --mark-color: var(--cream);
 }
 
 .welcome-copy {
@@ -678,13 +777,8 @@ a.card-action:active, .nav-cta:active, .qr-link:active, .qr-close:active {
   }
 
   .hero-link:hover {
-    color: var(--paper);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  .hero-link:hover span {
-    translate: 0 2px;
+    background: var(--paper);
+    translate: 0 -2px;
   }
 
   .channel-card:hover, .channel-card:focus-within {
@@ -718,6 +812,10 @@ a.card-action:active, .nav-cta:active, .qr-link:active, .qr-close:active {
 
 @media (max-width: 840px) {
   .channel-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .service-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -759,6 +857,7 @@ a.card-action:active, .nav-cta:active, .qr-link:active, .qr-close:active {
 
   .hero {
     grid-template-columns: minmax(0, 1fr) clamp(65px, 22vw, 120px);
+    grid-template-areas: "copy art" "actions actions";
     gap: 8px;
     margin-block-start: 10px;
     padding: 12px;
@@ -775,8 +874,17 @@ a.card-action:active, .nav-cta:active, .qr-link:active, .qr-close:active {
   }
 
   .hero-link {
-    margin-block-start: 0;
+    padding-inline: 5px;
     font-size: 12px;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr 1.27fr;
+  }
+
+  .hero-link-primary {
+    grid-column: 1 / -1;
   }
 
   .section-heading {
@@ -802,7 +910,7 @@ a.card-action:active, .nav-cta:active, .qr-link:active, .qr-close:active {
   }
 
   .channel-card {
-    grid-template-columns: minmax(0, 1fr) clamp(103px, 30vw, 140px);
+    grid-template-columns: minmax(0, 1fr) clamp(110px, 31vw, 146px);
     grid-template-rows: auto auto;
     align-items: center;
     gap: 8px 10px;
@@ -844,11 +952,11 @@ a.card-action:active, .nav-cta:active, .qr-link:active, .qr-close:active {
     gap: 12px;
   }
 
-  .vision-copy {
-    padding: 10px 0 0;
-    border-inline-start: 0;
-    border-block-start: 1px solid var(--line);
+  .service-list {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
+
 }
 
 @media (max-width: 330px) {
@@ -876,5 +984,9 @@ a.card-action:active, .nav-cta:active, .qr-link:active, .qr-close:active {
 
   *, *::before, *::after {
     transition: none !important;
+  }
+
+  .falling-marks {
+    display: none;
   }
 }

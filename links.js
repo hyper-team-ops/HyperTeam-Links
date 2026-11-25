@@ -4,28 +4,37 @@ window.HYPERTEAM_LINKS = [
     "name": "قناة الفريق",
     "handle": "@HyperTeam_ITE",
     "icon": "telegram",
-    "description": "تابعوا أخبار HyperTeam وإعلاناته عبر القناة الرسمية.",
-    "action": "انضموا إلى القناة",
+    "description": "لتعرف إعلانات الفريق وأخبار الورشات والفعاليات.",
+    "action": "انضم لقناة الفريق",
     "url": "https://t.me/HyperTeam_ITE",
     "qr": "assets/qr/qr-01.svg"
-  },
-  {
-    "name": "مجموعة المناقشة",
-    "handle": "@HyperTeam_Chat",
-    "icon": "telegram",
-    "description": "مساحة للنقاش وتبادل الأفكار مع مجتمع الفريق.",
-    "action": "انضموا إلى المجموعة",
-    "url": "https://t.me/HyperTeam_Chat",
-    "qr": "assets/qr/qr-02.svg"
   },
   {
     "name": "إنستغرام",
     "handle": "@hyperteam_ite",
     "icon": "instagram",
-    "description": "تابعوا أنشطتنا ولحظاتنا على إنستغرام.",
-    "action": "تابعونا على إنستغرام",
+    "description": "تعرّف علينا عن قرب، وشوف فعالياتنا ولحظاتنا بالكلية.",
+    "action": "تابعنا على إنستغرام",
     "url": "https://www.instagram.com/hyperteam_ite?stkn=MXhpdm42ZzBjODB1",
+    "qr": "assets/qr/qr-02.svg"
+  },
+  {
+    "name": "مجموعة المناقشة",
+    "handle": "@HyperTeam_Chat",
+    "icon": "telegram",
+    "description": "اسأل عن أول أيامك بالكلية وتعرّف على زملائك.",
+    "action": "انضم لمجموعة المناقشة",
+    "url": "https://t.me/HyperTeam_Chat",
     "qr": "assets/qr/qr-03.svg"
+  },
+  {
+    "name": "موقع الكورسات والبرامج",
+    "handle": "HyperTeam Crawler",
+    "icon": "link",
+    "description": "عم تدور على كورس أو برنامج هندسي؟ بلّش من الفهرس.",
+    "action": "تصفّح الكورسات والبرامج",
+    "url": "https://hyper-team-ops.github.io/HyperTeam-Crawler/",
+    "qr": "assets/qr/qr-04.svg"
   },
   {
     "name": "فيسبوك",
@@ -34,15 +43,6 @@ window.HYPERTEAM_LINKS = [
     "description": "تابعوا أخبار الفريق ومنشوراته على فيسبوك.",
     "action": "تابعونا على فيسبوك",
     "url": "https://www.facebook.com/share/1HVyP9hvtr/?mibextid=wwXIfr",
-    "qr": "assets/qr/qr-04.svg"
-  },
-  {
-    "name": "موقع الكورسات والبرامج",
-    "handle": "HyperTeam Crawler",
-    "icon": "link",
-    "description": "تصفحوا الكورسات والبرامج المتاحة للفريق.",
-    "action": "اكتشفوا الكورسات والبرامج",
-    "url": "https://hyper-team-ops.github.io/HyperTeam-Crawler/",
     "qr": "assets/qr/qr-05.svg"
   },
   {
